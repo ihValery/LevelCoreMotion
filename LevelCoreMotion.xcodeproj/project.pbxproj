@@ -11,6 +11,7 @@
 		80753ABA29F96D90008DB507 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80753AB929F96D90008DB507 /* ContentView.swift */; };
 		80753ABC29F96D91008DB507 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80753ABB29F96D91008DB507 /* Assets.xcassets */; };
 		80753ABF29F96D91008DB507 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80753ABE29F96D91008DB507 /* Preview Assets.xcassets */; };
+		80753AC929F9718A008DB507 /* MotionIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80753AC829F9718A008DB507 /* MotionIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		80753AB929F96D90008DB507 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		80753ABB29F96D91008DB507 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80753ABE29F96D91008DB507 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		80753AC829F9718A008DB507 /* MotionIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,7 +54,7 @@
 			isa = PBXGroup;
 			children = (
 				80753AB729F96D90008DB507 /* LevelCoreMotionApp.swift */,
-				80753AB929F96D90008DB507 /* ContentView.swift */,
+				80753AC529F97127008DB507 /* View */,
 				80753ABB29F96D91008DB507 /* Assets.xcassets */,
 				80753ABD29F96D91008DB507 /* Preview Content */,
 			);
@@ -65,6 +67,15 @@
 				80753ABE29F96D91008DB507 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		80753AC529F97127008DB507 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				80753AB929F96D90008DB507 /* ContentView.swift */,
+				80753AC829F9718A008DB507 /* MotionIndicator.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,6 +148,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80753AC929F9718A008DB507 /* MotionIndicator.swift in Sources */,
 				80753ABA29F96D90008DB507 /* ContentView.swift in Sources */,
 				80753AB829F96D90008DB507 /* LevelCoreMotionApp.swift in Sources */,
 			);
