@@ -8,19 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		80753AB829F96D90008DB507 /* LevelCoreMotionApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80753AB729F96D90008DB507 /* LevelCoreMotionApp.swift */; };
-		80753ABA29F96D90008DB507 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80753AB929F96D90008DB507 /* ContentView.swift */; };
 		80753ABC29F96D91008DB507 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80753ABB29F96D91008DB507 /* Assets.xcassets */; };
 		80753ABF29F96D91008DB507 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80753ABE29F96D91008DB507 /* Preview Assets.xcassets */; };
 		80753AC929F9718A008DB507 /* MotionIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80753AC829F9718A008DB507 /* MotionIndicator.swift */; };
+		80753ACC29F97561008DB507 /* MotionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80753ACB29F97561008DB507 /* MotionManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		80753AB429F96D90008DB507 /* LevelCoreMotion.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LevelCoreMotion.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		80753AB729F96D90008DB507 /* LevelCoreMotionApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelCoreMotionApp.swift; sourceTree = "<group>"; };
-		80753AB929F96D90008DB507 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		80753ABB29F96D91008DB507 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80753ABE29F96D91008DB507 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		80753AC829F9718A008DB507 /* MotionIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionIndicator.swift; sourceTree = "<group>"; };
+		80753ACB29F97561008DB507 /* MotionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MotionManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +55,7 @@
 			children = (
 				80753AB729F96D90008DB507 /* LevelCoreMotionApp.swift */,
 				80753AC529F97127008DB507 /* View */,
+				80753ACA29F97540008DB507 /* ViewModel */,
 				80753ABB29F96D91008DB507 /* Assets.xcassets */,
 				80753ABD29F96D91008DB507 /* Preview Content */,
 			);
@@ -72,10 +73,17 @@
 		80753AC529F97127008DB507 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				80753AB929F96D90008DB507 /* ContentView.swift */,
 				80753AC829F9718A008DB507 /* MotionIndicator.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		80753ACA29F97540008DB507 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				80753ACB29F97561008DB507 /* MotionManager.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,8 +157,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				80753AC929F9718A008DB507 /* MotionIndicator.swift in Sources */,
-				80753ABA29F96D90008DB507 /* ContentView.swift in Sources */,
 				80753AB829F96D90008DB507 /* LevelCoreMotionApp.swift in Sources */,
+				80753ACC29F97561008DB507 /* MotionManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,11 +290,13 @@
 				DEVELOPMENT_TEAM = 879U287R5Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Тестим Motion";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -311,11 +321,13 @@
 				DEVELOPMENT_TEAM = 879U287R5Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Тестим Motion";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.games";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
