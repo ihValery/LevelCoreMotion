@@ -37,14 +37,24 @@ struct MotionIndicator: View {
                                 yValue: outsideRadius(x: x, y: y).1, radius: radius)
             }
             
-            Text("Множитель 100")
-            
-            motionValueText(xValue: x * radius, yValue: y * radius)
-            
             Text("Формула")
             
             motionValueText(xValue: newPointXY(x1: x, y1: y).0,
                             yValue: newPointXY(x1: x, y1: y).1)
+            
+            //
+            VStack(alignment: .leading, spacing: 20) {
+                let radius1 = sqrt(Double( pow(x, 2) + pow(y, 2) ))
+                let sinA = sin(y / radius1)
+                let newY = sinA * radius
+                let newX = sqrt(Double( pow(radius, 2) - pow(CGFloat(newY), 2) ))
+                
+                Text("Radius1 = \(radius1)")
+                Text("sinA = \(sinA)")
+                Text("newX = \(newX)")
+                Text("newY = \(newY)")
+            }
+            
         }
     }
 
