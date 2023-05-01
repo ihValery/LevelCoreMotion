@@ -25,8 +25,13 @@ struct MotionIndicator: View {
     //MARK: Body
     
     var body: some View {
-        VStack {
+        VStack(spacing: 0) {
             motionValueText(xValue: x, yValue: y)
+            
+            Text("Множитель 100")
+                .padding(.bottom)
+            
+            motionValueText(xValue: x * 100, yValue: y * 100)
             
             ZStack {
                 BigCircleView(xValue: x, yValue: y)
