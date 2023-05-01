@@ -27,26 +27,24 @@ struct MotionIndicator: View {
     //MARK: Body
     
     var body: some View {
-        VStack(spacing: 0) {
+        VStack(spacing: 20) {
             motionValueText(xValue: x, yValue: y)
                         
             ZStack {
-                BigCircleView(xValue: x, yValue: y, radius: 100)
+                BigCircleView(xValue: x, yValue: y, radius: radius)
                 
                 SmallCircleView(xValue: outsideRadius(x: x, y: y).0,
-                                yValue: outsideRadius(x: x, y: y).1)
+                                yValue: outsideRadius(x: x, y: y).1, radius: radius)
             }
             
             Text("Множитель 100")
-                .padding([.top, .bottom], 40)
             
-            motionValueText(xValue: x * 100, yValue: y * 100)
+            motionValueText(xValue: x * radius, yValue: y * radius)
             
             Text("Формула")
-                .padding([.top, .bottom], 40)
             
-            motionValueText(xValue: outsideRadius(x: x, y: y).0,
-                            yValue: outsideRadius(x: x, y: y).1)
+            motionValueText(xValue: newPointXY(x1: x, y1: y).0,
+                            yValue: newPointXY(x1: x, y1: y).1)
         }
     }
 
@@ -54,22 +52,30 @@ struct MotionIndicator: View {
     
     private func outsideRadius(x: CGFloat, y: CGFloat) -> (CGFloat, CGFloat) {
         // (x - a)^2 + (y - b)^ > r^2
-        if pow(x * 100, 2) + pow(y * 100, 2) > CGFloat(10000) {
-            return (1, 1)
+        if pow(x * radius, 2) + pow(y * radius, 2) > pow(radius, 2) {
+            return newPointXY(x1: x, y1: y)
         } else {
             return (x, y)
         }
     }
 
     private func motionValueText(xValue: CGFloat, yValue: CGFloat) -> some View {
-        return HStack(spacing: 20) {
+        return HStack {
             Text("x = \( String(format: "%.3f", xValue) )")
                 .frame(width: 135, alignment: .center)
             Text("y = \( String(format: "%.3f", yValue) )")
                 .frame(width: 135, alignment: .center)
         }
         .foregroundColor(.gray)
-        .padding(.bottom, 50)
+    }
+    
+    private func newPointXY(x1: CGFloat, y1: CGFloat) -> (CGFloat, CGFloat) {
+        let radius1 = sqrt(Double( pow(x1, 2) + pow(y1, 2) ))
+        let sinA = sin(y1 / radius1)
+        let y = sinA * radius
+        let x = sqrt(Double( pow(radius, 2) - pow(CGFloat(y), 2) ))
+        
+        return (x / radius, y / radius)
     }
 }
 
