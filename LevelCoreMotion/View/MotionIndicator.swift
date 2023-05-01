@@ -15,6 +15,8 @@ struct MotionIndicator: View {
     
     @StateObject private var motion = MotionManager()
     
+    @State private var radius: CGFloat = 100
+    
     private var x: CGFloat {
         motion.xValue
     }
@@ -29,12 +31,10 @@ struct MotionIndicator: View {
             motionValueText(xValue: x, yValue: y)
                         
             ZStack {
-                BigCircleView(xValue: x, yValue: y)
+                BigCircleView(xValue: x, yValue: y, radius: 100)
                 
                 SmallCircleView(xValue: outsideRadius(x: x, y: y).0,
                                 yValue: outsideRadius(x: x, y: y).1)
-                
-                speckOfLight()
             }
             
             Text("Множитель 100")
@@ -53,6 +53,7 @@ struct MotionIndicator: View {
     //MARK: Functions
     
     private func outsideRadius(x: CGFloat, y: CGFloat) -> (CGFloat, CGFloat) {
+        // (x - a)^2 + (y - b)^ > r^2
         if pow(x * 100, 2) + pow(y * 100, 2) > CGFloat(10000) {
             return (1, 1)
         } else {
@@ -69,13 +70,6 @@ struct MotionIndicator: View {
         }
         .foregroundColor(.gray)
         .padding(.bottom, 50)
-    }
-    
-    private func speckOfLight() -> some View {
-        Circle()
-            .frame(width: 70, height: 70)
-            .foregroundColor(.white.opacity(0.2))
-            .blur(radius: 10)
     }
 }
 
