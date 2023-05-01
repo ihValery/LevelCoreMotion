@@ -15,12 +15,14 @@ struct SmallCircleView: View {
     
     private var xValue: CGFloat
     private var yValue: CGFloat
+    private var radius: CGFloat
     
     //MARK: Initializer
     
-    init(xValue: CGFloat, yValue: CGFloat) {
+    init(xValue: CGFloat, yValue: CGFloat, radius: CGFloat) {
         self.xValue = xValue
         self.yValue = yValue
+        self.radius = radius
     }
     
     //MARK: Body
@@ -38,7 +40,7 @@ struct SmallCircleView: View {
                     .drop(color: .black.opacity(0.05), radius: 2, x: xValue * 4, y: yValue * 4)
                 )
             )
-            .offset(x: xValue * 100, y: yValue * 100)
+            .offset(x: xValue * radius, y: yValue * radius)
             .frame(width: 20, height: 20)
             .rotation3DEffect(.degrees(xValue * 2), axis: (x: 0, y: 1, z: 0))
             .rotation3DEffect(.degrees(yValue * 2), axis: (x: -1, y: 0, z: 0))
@@ -50,6 +52,6 @@ struct SmallCircleView: View {
 
 struct SmallCircleView_Previews: PreviewProvider {
     static var previews: some View {
-        SmallCircleView(xValue: 0, yValue: 0)
+        SmallCircleView(xValue: 0, yValue: 0, radius: 100)
     }
 }
