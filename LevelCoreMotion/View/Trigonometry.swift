@@ -36,15 +36,15 @@ struct Trigonometry: View {
             
             Path { path in
                 path.move(to: center)
-                path.addLine(to: CGPoint(x: center.x + (cos(3.14 / 4) * radius), y: center.y))
+                path.addLine(to: CGPoint(x: center.x + (cos(.pi / 4) * radius), y: center.y))
             }
             .strokedPath(StrokeStyle(lineWidth: 2))
             .foregroundColor(.red)
             
             Path { path in
-                path.move(to: CGPoint(x: center.x + (cos(3.14 / 4) * radius), y: center.y))
-                path.addLine(to: CGPoint(x: center.x + (cos(3.14 / 4) * radius),
-                                         y: center.y - sin(3.14 / 4) * radius))
+                path.move(to: CGPoint(x: center.x + (cos(.pi / 4) * radius), y: center.y))
+                path.addLine(to: CGPoint(x: center.x + (cos(.pi / 4) * radius),
+                                         y: center.y - sin(.pi / 4) * radius))
             }
             .strokedPath(StrokeStyle(lineWidth: 2))
             .foregroundColor(.red)
@@ -95,7 +95,7 @@ struct Trigonometry: View {
     }
     
     private func radiusSlider() -> some View {
-        Slider(value: $radius, in: 0...465)
+        Slider(value: $radius, in: 0...165)
             .padding(.horizontal)
             .tint(.purple)
     }
