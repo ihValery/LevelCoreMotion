@@ -11,7 +11,8 @@ import SwiftUI
 struct LevelCoreMotionApp: App {
     var body: some Scene {
         WindowGroup {
-            MotionIndicator()
+//            MotionIndicator()
+            Trigonometry()
         }
     }
 }
