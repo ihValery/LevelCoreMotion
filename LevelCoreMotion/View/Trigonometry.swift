@@ -81,7 +81,7 @@ struct Trigonometry: View {
             path.move(to: center)
             path.addLine(to: CGPoint(x: .zero, y: rect.midY))
         }
-        .strokedPath(StrokeStyle(lineWidth: 1, dash: [20, 30]))
+        .strokedPath(StrokeStyle(lineWidth: 1, dash: [5]))
         .foregroundColor(.gray)
         
         VStack(alignment: .leading) {
