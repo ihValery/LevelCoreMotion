@@ -13,33 +13,32 @@ struct CircleSlider: View {
     
     //MARK: Properties
     
-    @State private var progress: Double = 0.33
+    @State private var rotationAngle: Angle = .degrees(0)
     
-    @State private var rotationAngle: Angle = .degrees(120)
+    @Binding var radius: Double
     
-    private let diametr: Double = 300.0
-        
+//    private let diametr: Double = 300.0
+    
+    private var anglesTriginometricCircle: Angle {
+        .degrees(360) - rotationAngle
+    }
+    
     //MARK: Body
 
     var body: some View {
         ZStack {
             Circle()
-                .stroke(.gray.opacity(0.3), lineWidth: 20)
+                .stroke(.purple, lineWidth: 4)
                 .overlay {
-                    Text("\(progress, specifier: "%.2F")")
+                    Text("\(anglesTriginometricCircle.degrees, specifier: "%.0F")˚")
                         .font(.system(size: 80, weight: .bold, design: .rounded))
                 }
             
             Circle()
-                .trim(from: 0, to: progress)
-                .stroke(.purple, style: StrokeStyle(lineWidth: 20, lineCap: .round))
-                .rotationEffect(.degrees(-90))
-            
-            Circle()
                 .fill(.white)
                 .shadow(radius: 3)
-                .frame(width: 21, height: 21)
-                .offset(y: -diametr / 2)
+                .frame(width: 20, height: 20)
+                .offset(y: -radius)
                 .rotationEffect(rotationAngle)
                 .gesture(
                     DragGesture(minimumDistance: 0.0)
@@ -47,9 +46,9 @@ struct CircleSlider: View {
                             rotationAngle = changeAngle(location: value.location)
                         }
                 )
-            
+                .rotationEffect(.degrees(90))
         }
-        .frame(width: diametr, height: diametr)
+        .frame(width: radius * 2, height: radius * 2)
     }
     
     //MARK: Private Methods
@@ -64,9 +63,6 @@ struct CircleSlider: View {
         // Convert the angle to a range from 0 to 360 (rather than having negative angles)
         let positiveAngle = angleRadians < 0 ? angleRadians + (.pi * 2) : angleRadians
         
-        // Update slider progress value based on angle
-        progress = positiveAngle / (2.0 * .pi)
-        
         return Angle(radians: positiveAngle)
     }
 }
@@ -75,6 +71,6 @@ struct CircleSlider: View {
 
 struct CircleSlider_Previews: PreviewProvider {
     static var previews: some View {
-        CircleSlider()
+        CircleSlider(radius: .constant(160))
     }
 }

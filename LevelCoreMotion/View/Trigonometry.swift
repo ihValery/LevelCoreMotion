@@ -24,7 +24,10 @@ struct Trigonometry: View {
 
             coordinateAxis(rect: rect, center: center)
             
-            mainCircle(center: center)
+//            mainCircle(center: center)
+            
+            CircleSlider(radius: $radius)
+                .position(center)
             
             Path { path in
                 path.move(to: center)
@@ -57,14 +60,14 @@ struct Trigonometry: View {
     
     //MARK: Functions
     
-    @ViewBuilder
-    private func mainCircle(center: CGPoint) -> some View {
-        Circle()
-            .stroke(lineWidth: 3)
-            .frame(width: radius * 2, height: radius * 2)
-            .position(center)
-            .foregroundColor(.purple)
-    }
+//    @ViewBuilder
+//    private func mainCircle(center: CGPoint) -> some View {
+//        Circle()
+//            .stroke(lineWidth: 3)
+//            .frame(width: radius * 2, height: radius * 2)
+//            .position(center)
+//            .foregroundColor(.purple)
+//    }
     
     @ViewBuilder
     private func coordinateAxis(rect: CGRect, center: CGPoint) -> some View {
@@ -95,7 +98,7 @@ struct Trigonometry: View {
     }
     
     private func radiusSlider() -> some View {
-        Slider(value: $radius, in: 0...165)
+        Slider(value: $radius, in: 100...335)
             .padding(.horizontal)
             .tint(.purple)
     }
