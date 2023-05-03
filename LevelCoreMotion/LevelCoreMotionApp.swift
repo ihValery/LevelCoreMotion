@@ -12,8 +12,7 @@ struct LevelCoreMotionApp: App {
     var body: some Scene {
         WindowGroup {
 //            MotionIndicator()
-//            Trigonometry()
-            CircleSlider()
+            Trigonometry()
         }
     }
 }
