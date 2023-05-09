@@ -16,6 +16,11 @@ struct Trigonometry: View {
     @State private var radius: Double = 160
     
     @State private var angle: Angle = .degrees(0)
+    
+    private var anglesTriginometricCircle: Angle {
+//        .degrees(360) -
+        angle
+    }
 
     //MARK: Body
 
@@ -25,34 +30,15 @@ struct Trigonometry: View {
             let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
 
             coordinateAxis(rect: rect, center: center)
-                        
-            CircleSlider(rotationAngle: $angle, radius: $radius)
-                .position(center)
   
-            createHypotenuse(center: center)
-//            Path { path in
-//                path.move(to: center)
-//                path.addLine(to: CGPoint(x: center.x, y: center.y - radius))
-//            }
-//            .strokedPath(StrokeStyle(lineWidth: 2))
-//            .foregroundColor(.red)
-//            .rotationEffect(.degrees(45))
+            createHypotenuse(center: center, radius: radius, angle: angle)
             
-            Path { path in
-                path.move(to: center)
-                path.addLine(to: CGPoint(x: center.x + (cos(.pi / 4) * radius), y: center.y))
-            }
-            .strokedPath(StrokeStyle(lineWidth: 2))
-            .foregroundColor(.red)
+            createAdjoiningCathetus(center: center, radius: radius, angle: angle)
             
-            Path { path in
-                path.move(to: CGPoint(x: center.x + (cos(.pi / 4) * radius), y: center.y))
-                path.addLine(to: CGPoint(x: center.x + (cos(.pi / 4) * radius),
-                                         y: center.y - sin(.pi / 4) * radius))
-            }
-            .strokedPath(StrokeStyle(lineWidth: 2))
-            .foregroundColor(.red)
+            createOppositeCathetus(center: center, radius: radius, angle: angle)
 
+            CircleSlider(angle: $angle, radius: $radius)
+                .position(center)
         }
         .overlay(alignment: .bottom) {
             radiusSlider()
@@ -63,14 +49,33 @@ struct Trigonometry: View {
     
     //Build Triangle
     
-    private func createHypotenuse(center: CGPoint) -> some View {
+    private func createHypotenuse(center: CGPoint, radius: Double, angle: Angle) -> some View {
         Path { path in
             path.move(to: center)
             path.addLine(to: CGPoint(x: center.x, y: center.y - radius))
         }
         .strokedPath(StrokeStyle(lineWidth: 2))
         .foregroundColor(.red)
-        .rotationEffect(.degrees(45))
+        .rotationEffect(angle + .degrees(90))
+    }
+    
+    private func createAdjoiningCathetus(center: CGPoint, radius: Double, angle: Angle) -> some View {
+        Path { path in
+            path.move(to: center)
+            path.addLine(to: CGPoint(x: center.x + (cos(angle.radians) * radius), y: center.y))
+        }
+        .strokedPath(StrokeStyle(lineWidth: 2))
+        .foregroundColor(.red)
+    }
+    
+    private func createOppositeCathetus(center: CGPoint, radius: Double, angle: Angle) -> some View {
+        Path { path in
+            path.move(to: CGPoint(x: center.x + (cos(angle.radians) * radius), y: center.y))
+            path.addLine(to: CGPoint(x: center.x + (cos((.degrees(360) - angle).radians) * radius),
+                                     y: center.y - sin((.degrees(360) - angle).radians) * radius))
+        }
+        .strokedPath(StrokeStyle(lineWidth: 2))
+        .foregroundColor(.red)
     }
         
     @ViewBuilder
@@ -98,7 +103,11 @@ struct Trigonometry: View {
             }
             
             Text("Radius = \(radius, specifier: "%.0F")")
-            Text("Angles = \((Angle.degrees(360) - angle).degrees, specifier: "%.0F")˚")
+            
+            HStack {
+                Text("Real Angles = \((angle).degrees, specifier: "%.0F")˚")
+                Text("Fake Angles = \((Angle.degrees(360) - angle).degrees, specifier: "%.0F")˚")
+            }
         }
         .padding(.leading)
         .font(.caption)

@@ -13,7 +13,7 @@ struct CircleSlider: View {
     
     //MARK: Properties
     
-    @Binding var rotationAngle: Angle
+    @Binding var angle: Angle
     
     @Binding var radius: Double
     
@@ -28,7 +28,7 @@ struct CircleSlider: View {
             Circle()
                 .stroke(.purple, lineWidth: 4)
 //                .overlay {
-//                    Text("\(anglesTriginometricCircle.degrees, specifier: "%.0F")˚")
+//                    Text("\(angle.degrees, specifier: "%.0F")˚")
 //                        .font(.system(size: 80, weight: .bold, design: .rounded))
 //                }
             
@@ -37,11 +37,11 @@ struct CircleSlider: View {
                 .shadow(radius: 3)
                 .frame(width: 20, height: 20)
                 .offset(y: -radius)
-                .rotationEffect(rotationAngle)
+                .rotationEffect(angle)
                 .gesture(
                     DragGesture(minimumDistance: 0.0)
                         .onChanged { value in
-                            rotationAngle = changeAngle(location: value.location)
+                            angle = changeAngle(location: value.location)
                         }
                 )
                 .rotationEffect(.degrees(90))
@@ -54,7 +54,7 @@ struct CircleSlider: View {
     private func changeAngle(location: CGPoint) -> Angle {
         // Create a Vector for the location (reversing the y-coordinate system on iOS)
         let vector = CGVector(dx: location.x, dy: -location.y)
-        
+                
         // Calculate the angle of the vector
         let angleRadians = atan2(vector.dx, vector.dy)
         
@@ -68,7 +68,17 @@ struct CircleSlider: View {
 //MARK: - PreviewProvider
 
 struct CircleSlider_Previews: PreviewProvider {
+        
     static var previews: some View {
-        CircleSlider(rotationAngle: .constant(.degrees(0)), radius: .constant(160))
+        SneakyView()
+    }
+    
+    //SneakyView to make the @Binding var work in the preview
+    struct SneakyView: View {
+        @State private var angle: Angle = .degrees(0)
+        
+        var body: some View {
+            CircleSlider(angle: $angle, radius: .constant(160))
+        }
     }
 }
