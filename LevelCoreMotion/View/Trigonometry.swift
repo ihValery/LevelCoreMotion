@@ -14,6 +14,8 @@ struct Trigonometry: View {
     //MARK: Properties
     
     @State private var radius: Double = 160
+    
+    @State private var angle: Angle = .degrees(0)
 
     //MARK: Body
 
@@ -23,19 +25,18 @@ struct Trigonometry: View {
             let center = CGPoint(x: rect.width / 2, y: rect.height / 2)
 
             coordinateAxis(rect: rect, center: center)
-            
-//            mainCircle(center: center)
-            
-            CircleSlider(radius: $radius)
+                        
+            CircleSlider(rotationAngle: $angle, radius: $radius)
                 .position(center)
-            
-            Path { path in
-                path.move(to: center)
-                path.addLine(to: CGPoint(x: center.x, y: center.y - radius))
-            }
-            .strokedPath(StrokeStyle(lineWidth: 2))
-            .foregroundColor(.red)
-            .rotationEffect(.degrees(45))
+  
+            createHypotenuse(center: center)
+//            Path { path in
+//                path.move(to: center)
+//                path.addLine(to: CGPoint(x: center.x, y: center.y - radius))
+//            }
+//            .strokedPath(StrokeStyle(lineWidth: 2))
+//            .foregroundColor(.red)
+//            .rotationEffect(.degrees(45))
             
             Path { path in
                 path.move(to: center)
@@ -60,15 +61,18 @@ struct Trigonometry: View {
     
     //MARK: Functions
     
-//    @ViewBuilder
-//    private func mainCircle(center: CGPoint) -> some View {
-//        Circle()
-//            .stroke(lineWidth: 3)
-//            .frame(width: radius * 2, height: radius * 2)
-//            .position(center)
-//            .foregroundColor(.purple)
-//    }
+    //Build Triangle
     
+    private func createHypotenuse(center: CGPoint) -> some View {
+        Path { path in
+            path.move(to: center)
+            path.addLine(to: CGPoint(x: center.x, y: center.y - radius))
+        }
+        .strokedPath(StrokeStyle(lineWidth: 2))
+        .foregroundColor(.red)
+        .rotationEffect(.degrees(45))
+    }
+        
     @ViewBuilder
     private func coordinateAxis(rect: CGRect, center: CGPoint) -> some View {
         Path { path in
@@ -88,9 +92,13 @@ struct Trigonometry: View {
         .foregroundColor(.gray)
         
         VStack(alignment: .leading) {
-            Text("Width = \(rect.width)")
-            Text("Height = \(rect.height)")
-            Text("Radius = \(radius)")
+            HStack {
+                Text("Width = \(rect.width, specifier: "%.0F")")
+                Text("Height = \(rect.height, specifier: "%.0F")")
+            }
+            
+            Text("Radius = \(radius, specifier: "%.0F")")
+            Text("Angles = \((Angle.degrees(360) - angle).degrees, specifier: "%.0F")˚")
         }
         .padding(.leading)
         .font(.caption)

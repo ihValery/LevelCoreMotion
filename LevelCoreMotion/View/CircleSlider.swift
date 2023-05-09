@@ -13,15 +13,13 @@ struct CircleSlider: View {
     
     //MARK: Properties
     
-    @State private var rotationAngle: Angle = .degrees(0)
+    @Binding var rotationAngle: Angle
     
     @Binding var radius: Double
     
-//    private let diametr: Double = 300.0
-    
-    private var anglesTriginometricCircle: Angle {
-        .degrees(360) - rotationAngle
-    }
+//    private var anglesTriginometricCircle: Angle {
+//        .degrees(360) - rotationAngle
+//    }
     
     //MARK: Body
 
@@ -29,10 +27,10 @@ struct CircleSlider: View {
         ZStack {
             Circle()
                 .stroke(.purple, lineWidth: 4)
-                .overlay {
-                    Text("\(anglesTriginometricCircle.degrees, specifier: "%.0F")˚")
-                        .font(.system(size: 80, weight: .bold, design: .rounded))
-                }
+//                .overlay {
+//                    Text("\(anglesTriginometricCircle.degrees, specifier: "%.0F")˚")
+//                        .font(.system(size: 80, weight: .bold, design: .rounded))
+//                }
             
             Circle()
                 .fill(.white)
@@ -71,6 +69,6 @@ struct CircleSlider: View {
 
 struct CircleSlider_Previews: PreviewProvider {
     static var previews: some View {
-        CircleSlider(radius: .constant(160))
+        CircleSlider(rotationAngle: .constant(.degrees(0)), radius: .constant(160))
     }
 }
