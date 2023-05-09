@@ -17,10 +17,10 @@ struct Trigonometry: View {
     
     @State private var angle: Angle = .degrees(0)
     
-    private var anglesTriginometricCircle: Angle {
-//        .degrees(360) -
-        angle
-    }
+//    private var anglesTriginometricCircle: Angle {
+////        .degrees(360) -
+//        angle
+//    }
 
     //MARK: Body
 
@@ -31,14 +31,14 @@ struct Trigonometry: View {
 
             coordinateAxis(rect: rect, center: center)
   
+            CircleSlider(angle: $angle, radius: $radius)
+                .position(center)
             createHypotenuse(center: center, radius: radius, angle: angle)
             
             createAdjoiningCathetus(center: center, radius: radius, angle: angle)
             
             createOppositeCathetus(center: center, radius: radius, angle: angle)
 
-            CircleSlider(angle: $angle, radius: $radius)
-                .position(center)
         }
         .overlay(alignment: .bottom) {
             radiusSlider()
@@ -115,7 +115,7 @@ struct Trigonometry: View {
     }
     
     private func radiusSlider() -> some View {
-        Slider(value: $radius, in: 100...335)
+        Slider(value: $radius, in: 100...500)
             .padding(.horizontal)
             .tint(.purple)
     }
