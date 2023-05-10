@@ -33,12 +33,8 @@ struct Trigonometry: View {
   
             CircleSlider(angle: $angle, radius: $radius)
                 .position(center)
-            createHypotenuse(center: center, radius: radius, angle: angle)
             
-            createAdjoiningCathetus(center: center, radius: radius, angle: angle)
-            
-            createOppositeCathetus(center: center, radius: radius, angle: angle)
-
+            createTriangle(center: center, radius: radius, angle: angle)
         }
         .overlay(alignment: .bottom) {
             radiusSlider()
@@ -48,6 +44,15 @@ struct Trigonometry: View {
     //MARK: Functions
     
     //Build Triangle
+    
+    @ViewBuilder
+    private func createTriangle(center: CGPoint, radius: Double, angle: Angle) -> some View {
+        createHypotenuse(center: center, radius: radius, angle: angle)
+        
+        createAdjoiningCathetus(center: center, radius: radius, angle: angle)
+        
+        createOppositeCathetus(center: center, radius: radius, angle: angle)
+    }
     
     private func createHypotenuse(center: CGPoint, radius: Double, angle: Angle) -> some View {
         Path { path in
